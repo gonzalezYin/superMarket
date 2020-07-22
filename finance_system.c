@@ -2,28 +2,27 @@
 // Created by 91601 on 2020/7/19.
 //
 #include<stdio.h>
-#include "structural_morphology.h"
+#include"finance_system.h"
 
-
-//½ñÈÕÊÕÈë
+//ä»Šæ—¥æ”¶å…¥
 double income(double arr[])
 {
 	return arr[0];
 }
 
-//½ñÈÕÖ§³ö
+//ä»Šæ—¥æ”¯å‡º
 double pay(double arr[])
 {
 	return arr[1];
 }
 
-//½ñÈÕÓ¯Àû
+//ä»Šæ—¥ç›ˆåˆ©
 double gain(double arr[])
 {
 	return arr[0] - arr[1];
 }
 
-//±¸ÓÃ
+//å¤‡ç”¨
 int gain_fuc(char filename[], struct goods *in)
 {
 	double gain1 = 0.0, gain2 = 0.0;
@@ -31,7 +30,7 @@ int gain_fuc(char filename[], struct goods *in)
 	index = (struct goods*)malloc(sizeof(struct goods));
 	if (index == NULL)
 	{
-		printf("ÄÚ´æ²»×ã£¡");
+		printf("å†…å­˜ä¸è¶³ï¼");
 		return NULL;
 	}
 	index = in;
@@ -46,11 +45,11 @@ int gain_fuc(char filename[], struct goods *in)
 	fp = fopen(filename, "r");
 	if (fp == NULL)
 	{
-		printf("ÎÄ¼ş´ò¿ªÊ§°Ü£¡");
+		printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥ï¼");
 		return NULL;
 	}
 	char buf[528];
-	fgets(buf, 528, fp);  //Ìø¹ıµÚÒ»ĞĞ
+	fgets(buf, 528, fp);  //è·³è¿‡ç¬¬ä¸€è¡Œ
 
 	while (!feof(fp))
 	{
