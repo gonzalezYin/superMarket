@@ -4,28 +4,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "login_system.h"
-#include "structural_morphology.h"
 
-//´ÓÎÄ¼ş¶ÁµÇÂ½ËùĞèµÄĞÅÏ¢
-struct good *readFile2()
+//ä»æ–‡ä»¶è¯»ç™»é™†æ‰€éœ€çš„ä¿¡æ¯
+struct good *read_file2()
 {
 	FILE *fp = NULL;
 	fp = fopen("staff.txt", "r");
 	if (fp == NULL)
 	{
-		printf("ÎÄ¼ş´ò¿ªÊ§°Ü£¡");
+		printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥ï¼");
 		return NULL;
 	}
 
 	char buf[528];
-	fgets(buf, 528, fp);  //Ìø¹ıµÚÒ»ĞĞ
-	fgets(buf, 528, fp);  //Ìø¹ıµÚ¶şĞĞ
+	fgets(buf, 528, fp);  //è·³è¿‡ç¬¬ä¸€è¡Œ
+	fgets(buf, 528, fp);  //è·³è¿‡ç¬¬äºŒè¡Œ
 
 	struct staff *head = NULL;
 	head = (struct staff*)malloc(sizeof(struct staff));
 	if (head == NULL)
 	{
-		printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+		printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 		return NULL;
 	}
 	head->next = NULL;
@@ -45,7 +44,7 @@ struct good *readFile2()
 }
 
 
-//µÇÂ½ÏµÍ³
+//ç™»é™†ç³»ç»Ÿ
 int login(int person)
 {
 	char passward[7];
@@ -53,19 +52,19 @@ int login(int person)
 	
 	if (person == 1)
 	{
-		printf("\n\n\n\t\t\t\t»¶Ó­Äú£¬³¬¼¶¹ÜÀíÔ±\n");
-		printf("\n\n\n\t\t\tÇëÊäÈëÄúµÄÃÜÂë£º");
+		printf("\n\n\n\t\t\t\tæ¬¢è¿æ‚¨ï¼Œè¶…çº§ç®¡ç†å‘˜\n");
+		printf("\n\n\n\t\t\tè¯·è¾“å…¥æ‚¨çš„å¯†ç ï¼š");
 		scanf("%s", passward);
 		FILE* fp = NULL;
 		fp = fopen("staff.txt", "r");
 		if (fp == NULL)
 		{
-			printf("ÎÄ¼ş´ò¿ªÊ§°Ü");
+			printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥");
 			return 0;
 		}
 
 		char buf[528];
-		fgets(buf, 528, fp);  //Ìø¹ıµÚÒ»ĞĞ
+		fgets(buf, 528, fp);  //è·³è¿‡ç¬¬ä¸€è¡Œ
 
 		struct staff *node = NULL;
 		node = (struct staff*)malloc(sizeof(struct staff));
@@ -73,14 +72,14 @@ int login(int person)
 		//printf("%d\t%s\t%lf\t%lf\t%d\t%d\n", node->number, node->name, node->cost, node->price, node->sale_number, node->stay_munber);
 		if (strcmp(passward, node->passward) == 0)
 		{
-			printf("³¬¼¶¹ÜÀíÔ±µÇÂ½³É¹¦\n");
-			printf("»¶Ó­Äú£¡%s\n\n",node->name);
+			printf("è¶…çº§ç®¡ç†å‘˜ç™»é™†æˆåŠŸ\n");
+			printf("æ¬¢è¿æ‚¨ï¼%s\n\n",node->name);
 			fclose(fp);
 			return 1;
 		}
 		else
 		{
-			printf("ÃÜÂë´íÎó£¬ÇëÖØĞÂµÇÂ¼\n");
+			printf("å¯†ç é”™è¯¯ï¼Œè¯·é‡æ–°ç™»å½•\n");
 			fclose(fp);
 			return 0;
 		}
@@ -89,17 +88,17 @@ int login(int person)
 	{
 		struct staff *head = NULL;
 		head = (struct staff *)malloc(sizeof(struct staff));
-		head = readFile2();
+		head = read_file2();
 		struct staff *node = head;
 		int exit = 0,pass=0;
-		printf("ÇëÊäÈëÕËºÅ\n");
+		printf("è¯·è¾“å…¥è´¦å·\n");
 		scanf("%s",id);
-		while (node != NULL)  //Èô²»ÊÇ±íÎ²£¬ÔòÑ­»·´òÓ¡½ÚµãµÄÊıÖµ
+		while (node != NULL)  //è‹¥ä¸æ˜¯è¡¨å°¾ï¼Œåˆ™å¾ªç¯æ‰“å°èŠ‚ç‚¹çš„æ•°å€¼
 		{
 			if (strcmp(id, node->id) == 0)
 			{
 				exit = 1;
-				printf("ÇëÊäÈëÃÜÂë\n");
+				printf("è¯·è¾“å…¥å¯†ç \n");
 				scanf("%s", passward);
 				if (strcmp(passward, node->passward)==0)
 				{
@@ -110,17 +109,17 @@ int login(int person)
 		}
 		if (exit== 0)
 		{
-			printf("ÕËºÅ²»´æÔÚ£¬Çë¼ì²é¡£\n");
+			printf("è´¦å·ä¸å­˜åœ¨ï¼Œè¯·æ£€æŸ¥ã€‚\n");
 			return 0;
 		}
 		else if (exit == 1 && pass == 0)
 		{
-			printf("ÃÜÂë´íÎó£¬Çë¼ì²é¡£\n");
+			printf("å¯†ç é”™è¯¯ï¼Œè¯·æ£€æŸ¥ã€‚\n");
 			return 0;
 		}
 		else if (exit == 1 && pass == 1)
 		{
-			printf("µÇÂ½³É¹¦£¡\n");
+			printf("ç™»é™†æˆåŠŸï¼\n");
 			return 2;
 		}
 	}
