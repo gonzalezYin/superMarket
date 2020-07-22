@@ -134,7 +134,7 @@ void add_staff()
 			new->next = NULL;
 			index->next = new;
 			printf("\n账号\t密码\t姓名\t岗位编号\t工资\n");
-			Disply_staff(new);
+			display_staff(new);
 			printf("新增管理员成功!\n");
 			storage_staff(head, "goods.txt");
 		}
@@ -164,7 +164,7 @@ void delete_staff()
 		lastNode = (struct staff *)malloc(sizeof(struct staff));
 
 		int exit = 0;//账号是否存在
-		struct staff *head = readFile_staff();
+		struct staff *head = read_file_staff();
 		struct staff *index = NULL;
 		index = (struct staff *)malloc(sizeof(struct staff));
 		if (index == NULL)
@@ -232,7 +232,7 @@ void change_staff()
 		currtentNode = (struct staff *)malloc(sizeof(struct staff));
 
 		int exit = 0;//管理员是否存在
-		struct staff *head = readFile_staff();
+		struct staff *head = read_file_staff();
 		struct staff *index = NULL;
 		index = (struct staff *)malloc(sizeof(struct staff));
 		if (index == NULL)
@@ -330,7 +330,7 @@ void change_password()
 	struct staff *currtentNode = NULL;
 	currtentNode = (struct staff *)malloc(sizeof(struct staff));
 	int exit = 0;//管理员是否存在
-	struct staff *head = readFile_staff();
+	struct staff *head = read_file_staff();
 	struct staff *index = NULL;
 	index = (struct staff *)malloc(sizeof(struct staff));
 	if (index == NULL)
