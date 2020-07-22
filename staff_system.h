@@ -6,27 +6,27 @@
 #include<stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "structural_morphology.h"
+#include "definition.h"
 
-//Õ¹Ê¾¹ÜÀíÔ±µÄĞÅÏ¢
-int Disply_staff(struct node *head);
+//å±•ç¤ºç®¡ç†å‘˜çš„ä¿¡æ¯
+int display_staff(struct node *head);
 
-//É¾³ıÖ¸¶¨¹ÜÀíÔ±µÄĞÅÏ¢
+//åˆ é™¤æŒ‡å®šç®¡ç†å‘˜çš„ä¿¡æ¯
 void delete_staff();
 
-//ĞŞ¸ÄÖ¸¶¨¹ÜÀíÔ±µÄĞÅÏ¢
+//ä¿®æ”¹æŒ‡å®šç®¡ç†å‘˜çš„ä¿¡æ¯
 void change_staff();
 
-//Ôö¼Ó¹ÜÀíÔ±
+//å¢åŠ ç®¡ç†å‘˜
 void add_staff();
 
-//´ò¿ª¹ÜÀíÔ±ĞÅÏ¢ÎÄ¼ş
-struct staff *readFile_staff();
+//æ‰“å¼€ç®¡ç†å‘˜ä¿¡æ¯æ–‡ä»¶
+struct staff *read_file_staff();
 
-//±£´æ¹ÜÀíÔ±ĞÅÏ¢
+//ä¿å­˜ç®¡ç†å‘˜ä¿¡æ¯
 void storage_staff(struct staff* head);
 
-//¸öÈËÃÜÂë¹ÜÀí
+//ä¸ªäººå¯†ç ç®¡ç†
 void change_password();
 
 #endif //SUPERMARKET_STAFF_SYSTEM_H
