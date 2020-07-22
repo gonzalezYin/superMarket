@@ -7,9 +7,6 @@
 #include<stdio.h>
 #include "definition.h"
 
-//菜单界面
-int finance_memu();
-
 //今日收入
 double income(double arr[]);
 
