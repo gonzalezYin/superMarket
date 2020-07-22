@@ -5,18 +5,18 @@
 #ifndef SUPERMARKET_FINANCE_SYSTEM_H
 #define SUPERMARKET_FINANCE_SYSTEM_H
 #include<stdio.h>
-#include "structural_morphology.h"
+#include "definition.h"
 
-//菜单界面
+//鑿滃崟鐣岄潰
 int financememu();
 
-//今日收入
+//浠婃棩鏀跺叆
 double income(double arr[]);
 
-//今日支出
+//浠婃棩鏀嚭
 double pay(double arr[]);
 
-//今日盈利
+//浠婃棩鐩堝埄
 double gain(double arr[]);
 
 
