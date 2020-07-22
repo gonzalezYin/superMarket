@@ -9,44 +9,42 @@
 
 #include"staff_system.h"
 
-#include "structural_morphology.h"
-
 #define  STAFF sizeof(struct staff)
 
 
-//Õ¹Ê¾¹ÜÀíÔ±µÄĞÅÏ¢
-int Disply_staff(struct staff *head)
+//å±•ç¤ºç®¡ç†å‘˜çš„ä¿¡æ¯
+int display_staff(struct staff *head)
 {
 	struct staff *node = head;
 	int i = 0;
-	while (node != NULL)  //Èô²»ÊÇ±íÎ²£¬ÔòÑ­»·´òÓ¡½ÚµãµÄÊıÖµ
+	while (node != NULL)  //è‹¥ä¸æ˜¯è¡¨å°¾ï¼Œåˆ™å¾ªç¯æ‰“å°èŠ‚ç‚¹çš„æ•°å€¼
 	{
 		printf("%s\t%s\t%s\t%d\t\t%d\n", node->id, node->passward, node->name, node->number, node->salary);
-		node = node->next;  //ÈÃpÖ¸ÏòÏÂÒ»¸ö½Úµã
-		i++;//¼ÆÊıÆ÷
+		node = node->next;  //è®©pæŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+		i++;//è®¡æ•°å™¨
 	}
-	return i;    //·µ»ØµÄÊÇÓĞ¶àÉÙ¸ö½áµã
+	return i;    //è¿”å›çš„æ˜¯æœ‰å¤šå°‘ä¸ªç»“ç‚¹
 }
 
-//´ò¿ª¹ÜÀíÔ±ĞÅÏ¢ÎÄ¼ş
-struct staff *readFile_staff()
+//æ‰“å¼€ç®¡ç†å‘˜ä¿¡æ¯æ–‡ä»¶
+struct staff *read_file_staff()
 {
 	FILE *fp = NULL;
 	fp = fopen("staff.txt", "r");
 	if (fp == NULL)
 	{
-		printf("ÎÄ¼ş´ò¿ªÊ§°Ü£¡");
+		printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥ï¼");
 		return NULL;
 	}
 
 	char buf[528];
-	fgets(buf, 528, fp);  //Ìø¹ıµÚÒ»ĞĞ
+	fgets(buf, 528, fp);  //è·³è¿‡ç¬¬ä¸€è¡Œ
 
 	struct staff *head = NULL;
 	head = (struct staff*)malloc(sizeof(struct staff));
 	if (head == NULL)
 	{
-		printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+		printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 		return NULL;
 	}
 	head->next = NULL;
@@ -65,41 +63,41 @@ struct staff *readFile_staff()
 	return head->next;
 }
 
-//±£´æ¹ÜÀíÔ±ĞÅÏ¢
+//ä¿å­˜ç®¡ç†å‘˜ä¿¡æ¯
 void storage_staff(struct staff* head)
 {
 	FILE* fp = NULL;
 	fp = fopen("staff.txt", "w+");
-	fprintf(fp, "ÕËºÅ\tÃÜÂë\tĞÕÃû\t¸ÚÎ»±àºÅ\t¹¤×Ê\n");
+	fprintf(fp, "è´¦å·\tå¯†ç \tå§“å\tå²—ä½ç¼–å·\tå·¥èµ„\n");
 	struct staff *node = head;
-	while (node != NULL)  //Èô²»ÊÇ±íÎ²£¬ÔòÑ­»·´òÓ¡½ÚµãµÄÊıÖµ
+	while (node != NULL)  //è‹¥ä¸æ˜¯è¡¨å°¾ï¼Œåˆ™å¾ªç¯æ‰“å°èŠ‚ç‚¹çš„æ•°å€¼
 	{
 		fprintf(fp, "%s\t%s\t%s\t%d\t%d\n", node->id, node->passward, node->name, node->number, node->salary);
-		node = node->next;  //ÈÃpÖ¸ÏòÏÂÒ»¸ö½Úµã
+		node = node->next;  //è®©pæŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
 	}
 	fclose(fp);
 }
 
-//Ôö¼Ó¹ÜÀíÔ±
+//å¢åŠ ç®¡ç†å‘˜
 void add_staff()
 {
-	printf("ÄãÏëĞÂÔö¹ÜÀíÔ±Âğ£¿\n");
-	printf("1--ÊÇ£¬ 0--·ñ\n");
+	printf("ä½ æƒ³æ–°å¢ç®¡ç†å‘˜å—ï¼Ÿ\n");
+	printf("1--æ˜¯ï¼Œ 0--å¦\n");
 	int choice;
 	scanf("%d", &choice);
 	while (choice == 1)
 	{
-		printf("ÇëÊäÈë¹ÜÀíÔ±ÕËºÅ");
+		printf("è¯·è¾“å…¥ç®¡ç†å‘˜è´¦å·");
 		char id[11];
 		scanf("%s", id);
 
-		int exit = 0;//¹ÜÀíÔ±ÊÇ·ñ´æÔÚ
+		int exit = 0;//ç®¡ç†å‘˜æ˜¯å¦å­˜åœ¨
 		struct staff * head = readFile_staff();
 		struct staff *index = NULL;
 		index = (struct staff *)malloc(sizeof(struct staff));
 		if (index == NULL)
 		{
-			printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+			printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 			return 0;
 		}
 		index = head;
@@ -118,46 +116,46 @@ void add_staff()
 
 		if (exit == 1)
 		{
-			printf("ÄãÏëĞÂÔöµÄ¹ÜÀíÔ±ÕËºÅÒÑ¾­´æÔÚ\n");
+			printf("ä½ æƒ³æ–°å¢çš„ç®¡ç†å‘˜è´¦å·å·²ç»å­˜åœ¨\n");
 		}
 		else
 		{
 			struct staff *new = NULL;
 			new = (struct staff *)malloc(sizeof(struct staff));
 			strcpy(new->id, id);
-			printf("ÇëÊäÈëÒªĞÂÔöµÄ¹ÜÀíÔ±ÃÜÂë£º  ");
+			printf("è¯·è¾“å…¥è¦æ–°å¢çš„ç®¡ç†å‘˜å¯†ç ï¼š  ");
 			scanf("%s", new->passward);
-			printf("ÇëÊäÈëÒªĞÂÔöµÄ¹ÜÀíÔ±ĞÕÃû£º  ");
+			printf("è¯·è¾“å…¥è¦æ–°å¢çš„ç®¡ç†å‘˜å§“åï¼š  ");
 			scanf("%s", new->name);
-			printf("ÇëÊäÈëÒªĞÂÔöµÄ¹ÜÀíÔ±¸ÚÎ»±àºÅ£º  ");
+			printf("è¯·è¾“å…¥è¦æ–°å¢çš„ç®¡ç†å‘˜å²—ä½ç¼–å·ï¼š  ");
 			scanf("%d", &new->number);
-			printf("ÇëÊäÈëÒªĞÂÔöµÄ¹ÜÀíÔ±¹¤×Ê£º  ");
+			printf("è¯·è¾“å…¥è¦æ–°å¢çš„ç®¡ç†å‘˜å·¥èµ„ï¼š  ");
 			scanf("%d", &new->salary);
 			new->next = NULL;
 			index->next = new;
-			printf("\nÕËºÅ\tÃÜÂë\tĞÕÃû\t¸ÚÎ»±àºÅ\t¹¤×Ê\n");
+			printf("\nè´¦å·\tå¯†ç \tå§“å\tå²—ä½ç¼–å·\tå·¥èµ„\n");
 			Disply_staff(new);
-			printf("ĞÂÔö¹ÜÀíÔ±³É¹¦!\n");
+			printf("æ–°å¢ç®¡ç†å‘˜æˆåŠŸ!\n");
 			storage_staff(head, "goods.txt");
 		}
 
-		printf("Äã»¹Ïë¼ÌĞøĞÂÔö¹ÜÀíÔ±Âğ£¿\n");
-		printf("1--ÊÇ£¬ 0--·ñ\n");
+		printf("ä½ è¿˜æƒ³ç»§ç»­æ–°å¢ç®¡ç†å‘˜å—ï¼Ÿ\n");
+		printf("1--æ˜¯ï¼Œ 0--å¦\n");
 		scanf("%d", &choice);
 	}
-	printf("ÕıÔÚÍË³öĞÂÔö¹ÜÀíÔ±\n");
+	printf("æ­£åœ¨é€€å‡ºæ–°å¢ç®¡ç†å‘˜\n");
 }
 
-//É¾³ıÖ¸¶¨¹ÜÀíÔ±µÄĞÅÏ¢
+//åˆ é™¤æŒ‡å®šç®¡ç†å‘˜çš„ä¿¡æ¯
 void delete_staff()
 {
-	printf("ÄãÏëÉ¾³ı¹ÜÀíÔ±Âğ£¿\n");
-	printf("1--ÊÇ£¬ 0--·ñ\n");
+	printf("ä½ æƒ³åˆ é™¤ç®¡ç†å‘˜å—ï¼Ÿ\n");
+	printf("1--æ˜¯ï¼Œ 0--å¦\n");
 	int choice;
 	scanf("%d", &choice);
 	while (choice == 1)
 	{
-		printf("ÇëÊäÈëÏëÉ¾³ıµÄ¹ÜÀíÔ±µÄÕËºÅ\n");
+		printf("è¯·è¾“å…¥æƒ³åˆ é™¤çš„ç®¡ç†å‘˜çš„è´¦å·\n");
 		char id[11];
 		scanf("%s", id);
 		struct staff *currtentNode = NULL;
@@ -165,13 +163,13 @@ void delete_staff()
 		struct staff *lastNode = NULL;
 		lastNode = (struct staff *)malloc(sizeof(struct staff));
 
-		int exit = 0;//ÕËºÅÊÇ·ñ´æÔÚ
+		int exit = 0;//è´¦å·æ˜¯å¦å­˜åœ¨
 		struct staff *head = readFile_staff();
 		struct staff *index = NULL;
 		index = (struct staff *)malloc(sizeof(struct staff));
 		if (index == NULL)
 		{
-			printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+			printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 			return 0;
 		}
 		index = head;
@@ -191,55 +189,55 @@ void delete_staff()
 
 		if (exit == 0)
 		{
-			printf("ÄãÏëÉ¾³ıµÄ¹ÜÀíÔ±µÄÕËºÅ²»´æÔÚ\n");
+			printf("ä½ æƒ³åˆ é™¤çš„ç®¡ç†å‘˜çš„è´¦å·ä¸å­˜åœ¨\n");
 		}
 		else
 		{
-			printf("ÄãÈ·¶¨É¾³ıÏÂÊö¹ÜÀíÔ±ÕËºÅ£¿\n1--È·¶¨ 0--ÍË³ö\n\n");
-			printf("\nÕËºÅ\tÃÜÂë\tĞÕÃû\t¸ÚÎ»±àºÅ\t\t¹¤×Ê\n");
+			printf("ä½ ç¡®å®šåˆ é™¤ä¸‹è¿°ç®¡ç†å‘˜è´¦å·ï¼Ÿ\n1--ç¡®å®š 0--é€€å‡º\n\n");
+			printf("\nè´¦å·\tå¯†ç \tå§“å\tå²—ä½ç¼–å·\t\tå·¥èµ„\n");
 			printf("%s\t%s\t%s\t%d\t%d\n", currtentNode->id, currtentNode->passward, currtentNode->name, currtentNode->number, currtentNode->salary);
 			int a;
 			scanf("%d", &a);
 			if (a == 1)
 			{
 				lastNode->next = currtentNode->next;
-				printf("É¾³ı¹ÜÀíÔ±³É¹¦!\n");
+				printf("åˆ é™¤ç®¡ç†å‘˜æˆåŠŸ!\n");
 				storage_staff(head);
 			}
 			else
 			{
-				printf("É¾³ı¹ÜÀíÔ±Ê§°Ü!\n");
+				printf("åˆ é™¤ç®¡ç†å‘˜å¤±è´¥!\n");
 			}
 		}
-		printf("Äã»¹Ïë¼ÌĞøÉ¾³ı¹ÜÀíÔ±Âğ£¿\n");
-		printf("1--ÊÇ£¬ 0--·ñ\n");
+		printf("ä½ è¿˜æƒ³ç»§ç»­åˆ é™¤ç®¡ç†å‘˜å—ï¼Ÿ\n");
+		printf("1--æ˜¯ï¼Œ 0--å¦\n");
 		scanf("%d", &choice);
 	}
-	printf("ÕıÔÚÍË³öÉ¾³ı¹ÜÀíÔ±\n");
+	printf("æ­£åœ¨é€€å‡ºåˆ é™¤ç®¡ç†å‘˜\n");
 }
 
-//ĞŞ¸ÄÖ¸¶¨¹ÜÀíÔ±µÄĞÅÏ¢
+//ä¿®æ”¹æŒ‡å®šç®¡ç†å‘˜çš„ä¿¡æ¯
 void change_staff()
 {
-	printf("ÄãÏëĞŞ¸Ä¹ÜÀíÔ±Âğ£¿\n");
-	printf("1--ÊÇ£¬ 0--·ñ\n");
+	printf("ä½ æƒ³ä¿®æ”¹ç®¡ç†å‘˜å—ï¼Ÿ\n");
+	printf("1--æ˜¯ï¼Œ 0--å¦\n");
 	int choice;
 	scanf("%d", &choice);
 	while (choice == 1)
 	{
-		printf("ÇëÊäÈë¹ÜÀíÔ±µÄÕËºÅ");
+		printf("è¯·è¾“å…¥ç®¡ç†å‘˜çš„è´¦å·");
 		char id[11];
 		scanf("%s", id);
 		struct staff *currtentNode = NULL;
 		currtentNode = (struct staff *)malloc(sizeof(struct staff));
 
-		int exit = 0;//¹ÜÀíÔ±ÊÇ·ñ´æÔÚ
+		int exit = 0;//ç®¡ç†å‘˜æ˜¯å¦å­˜åœ¨
 		struct staff *head = readFile_staff();
 		struct staff *index = NULL;
 		index = (struct staff *)malloc(sizeof(struct staff));
 		if (index == NULL)
 		{
-			printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+			printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 			return 0;
 		}
 		index = head;
@@ -255,14 +253,14 @@ void change_staff()
 
 		if (exit == 0)
 		{
-			printf("ÄãÏëĞŞ¸ÄµÄ¹ÜÀíÔ±µÄÕËºÅ²»´æÔÚ\n");
+			printf("ä½ æƒ³ä¿®æ”¹çš„ç®¡ç†å‘˜çš„è´¦å·ä¸å­˜åœ¨\n");
 		}
 		else
 		{
-			printf("\nÕËºÅ\tÃÜÂë\tĞÕÃû\t¸ÚÎ»±àºÅ\t¹¤×Ê\n");
+			printf("\nè´¦å·\tå¯†ç \tå§“å\tå²—ä½ç¼–å·\tå·¥èµ„\n");
 			printf("%s\t%s\t%s\t%d\t%d\n", currtentNode->id, currtentNode->passward, currtentNode->name, currtentNode->number, currtentNode->salary);
-			printf("ÇëÑ¡ÔñÄãÒªĞŞ¸ÄµÄÑ¡Ïî\n");
-			printf("1--ÕËºÅ\t2--ĞÕÃû\t3--Ö°Î»±àºÅ\t4--¹¤×Ê\n");
+			printf("è¯·é€‰æ‹©ä½ è¦ä¿®æ”¹çš„é€‰é¡¹\n");
+			printf("1--è´¦å·\t2--å§“å\t3--èŒä½ç¼–å·\t4--å·¥èµ„\n");
 			int choice2;
 			scanf("%d", &choice2);
 			switch (choice2)
@@ -271,7 +269,7 @@ void change_staff()
 			{
 					  char id1[7];
 					  int i = 0;
-					  printf("ÇëÊäÈëĞŞ¸Äºó¹ÜÀíÔ±ÕËºÅ£º  ");
+					  printf("è¯·è¾“å…¥ä¿®æ”¹åç®¡ç†å‘˜è´¦å·ï¼š  ");
 					  scanf("%s", id1);
 					  do
 					  {
@@ -282,7 +280,7 @@ void change_staff()
 							  if (strcmp(index->id, id1) == 0)
 							  {
 								  i = 1;
-								  printf("%sºÍÏÖÓĞ¹ÜÀíÔ±ÕËºÅÖØ¸´£¬ÇëÖØĞÂÊäÈë!", id1);
+								  printf("%så’Œç°æœ‰ç®¡ç†å‘˜è´¦å·é‡å¤ï¼Œè¯·é‡æ–°è¾“å…¥!", id1);
 								  scanf("%s", id1);
 							  }
 							  index = index->next;
@@ -293,51 +291,51 @@ void change_staff()
 			}
 			case 2:
 			{
-					  printf("ÇëÊäÈëĞŞ¸ÄºóµÄ¹ÜÀíÔ±ĞÕÃû£º  ");
+					  printf("è¯·è¾“å…¥ä¿®æ”¹åçš„ç®¡ç†å‘˜å§“åï¼š  ");
 					  scanf("%s", currtentNode->name);
 					  break;
 			}
 			case 3:
 			{
-					  printf("ÇëÊäÈëĞŞ¸ÄºóµÄ¹ÜÀíÔ±Ö°Î»±àºÅ£º  ");
+					  printf("è¯·è¾“å…¥ä¿®æ”¹åçš„ç®¡ç†å‘˜èŒä½ç¼–å·ï¼š  ");
 					  scanf("%d", &currtentNode->number);
 					  break;
 			}
 			case 4:
 			{
-					  printf("ÇëÊäÈëĞŞ¸ÄºóµÄ¹ÜÀíÔ±Ö°Î»¹¤×Ê");
+					  printf("è¯·è¾“å…¥ä¿®æ”¹åçš„ç®¡ç†å‘˜èŒä½å·¥èµ„");
 					  scanf("%d", &currtentNode->salary);
 					  break;
 			}
 			}
-			printf("ĞŞ¸Ä¹ÜÀíÔ±ĞÅÏ¢³É¹¦!\n");
-			printf("\nÕËºÅ\tÃÜÂë\tĞÕÃû\t¸ÚÎ»±àºÅ\t¹¤×Ê\n");
+			printf("ä¿®æ”¹ç®¡ç†å‘˜ä¿¡æ¯æˆåŠŸ!\n");
+			printf("\nè´¦å·\tå¯†ç \tå§“å\tå²—ä½ç¼–å·\tå·¥èµ„\n");
 			printf("%s\t%s\t%s\t%d\t\t%d\n", currtentNode->id, currtentNode->passward, currtentNode->name, currtentNode->number, currtentNode->salary);
 			storage_staff(head);
 		}
 
-		printf("Äã»¹Ïë¼ÌĞøĞŞ¸Ä¹ÜÀíÔ±ĞÅÏ¢Âğ£¿\n");
-		printf("1--ÊÇ£¬ 0--·ñ\n");
+		printf("ä½ è¿˜æƒ³ç»§ç»­ä¿®æ”¹ç®¡ç†å‘˜ä¿¡æ¯å—ï¼Ÿ\n");
+		printf("1--æ˜¯ï¼Œ 0--å¦\n");
 		scanf("%d", &choice);
 	}
-	printf("ÕıÔÚÍË³öĞŞ¸Ä¹ÜÀíÔ±ĞÅÏ¢\n");
+	printf("æ­£åœ¨é€€å‡ºä¿®æ”¹ç®¡ç†å‘˜ä¿¡æ¯\n");
 }
 
-//¸öÈËÃÜÂë¹ÜÀí
+//ä¸ªäººå¯†ç ç®¡ç†
 void change_password()
 {
-	printf("ÇëÊäÈëÄúµÄµÄÕËºÅ");
+	printf("è¯·è¾“å…¥æ‚¨çš„çš„è´¦å·");
 	char id[11];
 	scanf("%s", id);
 	struct staff *currtentNode = NULL;
 	currtentNode = (struct staff *)malloc(sizeof(struct staff));
-	int exit = 0;//¹ÜÀíÔ±ÊÇ·ñ´æÔÚ
+	int exit = 0;//ç®¡ç†å‘˜æ˜¯å¦å­˜åœ¨
 	struct staff *head = readFile_staff();
 	struct staff *index = NULL;
 	index = (struct staff *)malloc(sizeof(struct staff));
 	if (index == NULL)
 	{
-		printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+		printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 		return 0;
 	}
 	index = head;
@@ -353,44 +351,44 @@ void change_password()
 
 	if (exit == 0)
 	{
-		printf("ÄãÏëĞŞ¸ÄµÄ¹ÜÀíÔ±µÄÕËºÅ²»´æÔÚ\n");
+		printf("ä½ æƒ³ä¿®æ”¹çš„ç®¡ç†å‘˜çš„è´¦å·ä¸å­˜åœ¨\n");
 	}
 	else
 	{
-		printf("ÇëÊäÈëÄúµÄµÄÃÜÂë\n");
+		printf("è¯·è¾“å…¥æ‚¨çš„çš„å¯†ç \n");
 		char password[7];
 		scanf("%s", password);
 		if (strcmp(password, currtentNode->passward) == 0)
 		{
 
-			printf("\nÕËºÅ\tÃÜÂë\tĞÕÃû\t¸ÚÎ»±àºÅ\t¹¤×Ê\n");
+			printf("\nè´¦å·\tå¯†ç \tå§“å\tå²—ä½ç¼–å·\tå·¥èµ„\n");
 			printf("%s\t%s\t%s\t%d\t\t%d\n", currtentNode->id, currtentNode->passward, currtentNode->name, currtentNode->number, currtentNode->salary);
 
-			printf("ÇëÊäÈëĞŞ¸ÄºóµÄÃÜÂë\n");
+			printf("è¯·è¾“å…¥ä¿®æ”¹åçš„å¯†ç \n");
 			char passward1[7];
 			scanf("%s", passward1);
-			printf("ÇëÔÙ´ÎÊäÈëĞŞ¸ÄºóµÄÃÜÂëÒÔÈ·ÈÏ\n");
+			printf("è¯·å†æ¬¡è¾“å…¥ä¿®æ”¹åçš„å¯†ç ä»¥ç¡®è®¤\n");
 			char passward2[7];
 			scanf("%s", passward2);
 			if (strcmp(passward1, passward2) == 0)
 			{
 				strcpy(currtentNode->passward, passward1);
-				printf("ĞŞ¸Ä¹ÜÀíÔ±ĞÅÏ¢³É¹¦!\n");
-				printf("\nÕËºÅ\tÃÜÂë\tĞÕÃû\t¸ÚÎ»±àºÅ\t¹¤×Ê\n");
+				printf("ä¿®æ”¹ç®¡ç†å‘˜ä¿¡æ¯æˆåŠŸ!\n");
+				printf("\nè´¦å·\tå¯†ç \tå§“å\tå²—ä½ç¼–å·\tå·¥èµ„\n");
 				printf("%s\t%s\t%s\t%d\t\t%d\n", currtentNode->id, currtentNode->passward, currtentNode->name, currtentNode->number, currtentNode->salary);
 				storage_staff(head);
 			}
 			else
 			{
-				printf("Á½´ÎÃÜÂë²»Ò»Ñù£¡Çë¼ì²é\n");
+				printf("ä¸¤æ¬¡å¯†ç ä¸ä¸€æ ·ï¼è¯·æ£€æŸ¥\n");
 			}
 		}
 		else
 		{
-			printf("ÃÜÂë´íÎó£¡");
+			printf("å¯†ç é”™è¯¯ï¼");
 		}
 	}
-	printf("ÕıÔÚÍË³öĞŞ¸Ä¹ÜÀíÔ±ĞÅÏ¢\n");
+	printf("æ­£åœ¨é€€å‡ºä¿®æ”¹ç®¡ç†å‘˜ä¿¡æ¯\n");
 }
 
 
