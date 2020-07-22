@@ -1,2 +1,4 @@
-//Ö÷²Ëµ¥
+#include "definition.h"
+
+//ä¸»èœå•
 int main_menu();
