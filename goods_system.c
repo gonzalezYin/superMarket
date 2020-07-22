@@ -5,41 +5,39 @@
 #include <stdlib.h>
 #include "goods_system.h"
 
-#include "structural_morphology.h"
-
 #define GOODS sizeof(struct goods)
 
-int Disply(struct goods *head)
+int display(struct goods *head)
 {
 	struct goods *node = head;
 	int i = 0;
-	while (node != NULL)  //Èô²»ÊÇ±íÎ²£¬ÔòÑ­»·´òÓ¡½ÚµãµÄÊıÖµ
+	while (node != NULL)  //è‹¥ä¸æ˜¯è¡¨å°¾ï¼Œåˆ™å¾ªç¯æ‰“å°èŠ‚ç‚¹çš„æ•°å€¼
 	{
 		printf("%d\t%s\t%lf\t%lf\t%d\t%d\n", node->number, node->name, node->cost, node->price, node->sale_number, node->stay_number);
-		node = node->next;  //ÈÃpÖ¸ÏòÏÂÒ»¸ö½Úµã
-		i++;//¼ÆÊıÆ÷
+		node = node->next;  //è®©pæŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+		i++;//è®¡æ•°å™¨
 	}
-	return i;    //·µ»ØµÄÊÇÓĞ¶àÉÙ¸ö½áµã
+	return i;    //è¿”å›çš„æ˜¯æœ‰å¤šå°‘ä¸ªç»“ç‚¹
 }
 
-struct good *readFile()
+struct good *read_file()
 {
 	FILE *fp = NULL;
 	fp = fopen("goods.txt", "r");
 	if (fp == NULL)
 	{
-		printf("ÎÄ¼ş´ò¿ªÊ§°Ü£¡");
+		printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥ï¼");
 		return NULL;
 	}
 
 	char buf[528];
-	fgets(buf, 528, fp);  //Ìø¹ıµÚÒ»ĞĞ
+	fgets(buf, 528, fp);  //è·³è¿‡ç¬¬ä¸€è¡Œ
 
 	struct goods *head = NULL;
 	head = (struct goods*)malloc(sizeof(struct goods));
 	if (head == NULL)
 	{
-		printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+		printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 		return NULL;
 	}
 	head->next = NULL;
@@ -59,31 +57,31 @@ struct good *readFile()
 	return head->next;
 }
 
-void saveToFile(struct goods *head, char name[])
+void save_to_file(struct goods *head, char name[])
 {
 	FILE* fp = NULL;
 	fp = fopen(name, "w+");
-	fprintf(fp, "±àºÅ\tÃû³Æ\t½ø¼Û\tÊÛ¼Û\tÏúÁ¿\t¿â´æ\n");
+	fprintf(fp, "ç¼–å·\tåç§°\tè¿›ä»·\tå”®ä»·\té”€é‡\tåº“å­˜\n");
 	struct goods *node = head;
-	while (node != NULL)  //Èô²»ÊÇ±íÎ²£¬ÔòÑ­»·´òÓ¡½ÚµãµÄÊıÖµ
+	while (node != NULL)  //è‹¥ä¸æ˜¯è¡¨å°¾ï¼Œåˆ™å¾ªç¯æ‰“å°èŠ‚ç‚¹çš„æ•°å€¼
 	{
 		fprintf(fp, "%d\t%s\t%lf\t%lf\t%d\t%d\n", node->number, node->name, node->cost, node->price, node->sale_number, node->stay_number);
-		node = node->next;  //ÈÃpÖ¸ÏòÏÂÒ»¸ö½Úµã
+		node = node->next;  //è®©pæŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
 	}
 	fclose(fp);
 }
 
-//²éÕÒÉÌÆ·
-int findgoods()
+//æŸ¥æ‰¾å•†å“
+int find_goods()
 {
 	int choice=1;
 	while (choice == 1)
 	{
-		printf("ÇëÊäÈëÏë²éÕÒµÄÉÌÆ·µÄ±àºÅ\n");
+		printf("è¯·è¾“å…¥æƒ³æŸ¥æ‰¾çš„å•†å“çš„ç¼–å·\n");
 		int number;
 		scanf("%d", &number);
 
-		int exit = 0;//ÉÌÆ·ÊÇ·ñ´æÔÚ
+		int exit = 0;//å•†å“æ˜¯å¦å­˜åœ¨
 		struct goods *head = readFile();
 		struct goods *index = NULL;
 		index = (struct goods *)malloc(sizeof(struct goods));
@@ -91,7 +89,7 @@ int findgoods()
 		currtentNode = (struct goods *)malloc(sizeof(struct goods));
 		if (index == NULL)
 		{
-			printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+			printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 			return 0;
 		}
 		index = head;
@@ -106,44 +104,44 @@ int findgoods()
 		}
 		if (exit == 0)
 		{
-			printf("ÄãÏë²éÕÒÉÌÆ·µÄÉÌÆ·²»´æÔÚ\n");
+			printf("ä½ æƒ³æŸ¥æ‰¾å•†å“çš„å•†å“ä¸å­˜åœ¨\n");
 			return 0;
 		}
 		else
 		{
-			printf("ÄãÏë²éÕÒÉÌÆ·µÄÉÌÆ·´æÔÚ\n");
-			printf("\n±àºÅ\tÃû³Æ\t½ø¼Û\t\tÊÛ¼Û\t\tÏúÁ¿\t¿â´æ\n");
+			printf("ä½ æƒ³æŸ¥æ‰¾å•†å“çš„å•†å“å­˜åœ¨\n");
+			printf("\nç¼–å·\tåç§°\tè¿›ä»·\t\tå”®ä»·\t\té”€é‡\tåº“å­˜\n");
 			printf("%d\t%s\t%lf\t%lf\t%d\t%d\n", currtentNode->number, currtentNode->name, currtentNode->cost, currtentNode->price, currtentNode->sale_number, currtentNode->stay_number);
 			return 1;
 		}
-		printf("Äã»¹Ïë¼ÌĞø²éÕÒÉÌÆ·Âğ£¿\n");
-		printf("1--ÊÇ£¬ 0--·ñ\n");
+		printf("ä½ è¿˜æƒ³ç»§ç»­æŸ¥æ‰¾å•†å“å—ï¼Ÿ\n");
+		printf("1--æ˜¯ï¼Œ 0--å¦\n");
 		scanf("%d", &choice);
 	}
-	printf("ÍË³ö²éÕÒÉÌÆ·\n");
+	printf("é€€å‡ºæŸ¥æ‰¾å•†å“\n");
 }
 
-//ÉÌÆ·Â¼Èë
-double addgoods()
+//å•†å“å½•å…¥
+double add_goods()
 {
 	double pay = 0.0;
-	printf("ÄãÏëĞÂÔöÉÌÆ·Âğ£¿\n");
-	printf("1--ÊÇ£¬ 0--·ñ\n");
+	printf("ä½ æƒ³æ–°å¢å•†å“å—ï¼Ÿ\n");
+	printf("1--æ˜¯ï¼Œ 0--å¦\n");
 	int choice;
 	scanf("%d", &choice);
 	while (choice == 1)
 	{
-		printf("ÇëÊäÈëÉÌÆ·µÄ±àºÅ");
+		printf("è¯·è¾“å…¥å•†å“çš„ç¼–å·");
 		int number;
 		scanf("%d", &number);
 
-		int exit = 0;//ÉÌÆ·ÊÇ·ñ´æÔÚ
+		int exit = 0;//å•†å“æ˜¯å¦å­˜åœ¨
 		struct goods *head = readFile();
 		struct goods *index = NULL;
 		index = (struct goods *)malloc(sizeof(struct goods));
 		if (index == NULL)
 		{
-			printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+			printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 			return 0;
 		}
 		index = head;
@@ -162,61 +160,61 @@ double addgoods()
 
 		if (exit == 1)
 		{
-			printf("ÄãÏëĞÂÔöÉÌÆ·µÄÉÌÆ·±àºÅÒÑ¾­´æÔÚ\n");
+			printf("ä½ æƒ³æ–°å¢å•†å“çš„å•†å“ç¼–å·å·²ç»å­˜åœ¨\n");
 		}
 		else
 		{
 			struct goods *new = NULL;
 			new = (struct goods *)malloc(sizeof(struct goods));
 			new->number = number;
-			printf("ÇëÊäÈëÉÌÆ·Ãû³Æ£º  ");
+			printf("è¯·è¾“å…¥å•†å“åç§°ï¼š  ");
 			scanf("%s", new->name);
-			printf("ÇëÊäÈëÉÌÆ·½ø¼Û£º  ");
+			printf("è¯·è¾“å…¥å•†å“è¿›ä»·ï¼š  ");
 			scanf("%lf", &new->cost);
-			printf("ÇëÊäÈëÉÌÆ·ÊÛ¼Û£º  ");
+			printf("è¯·è¾“å…¥å•†å“å”®ä»·ï¼š  ");
 			scanf("%lf", &new->price);
-			printf("ÇëÊäÈëÉÌÆ·½ø»õÁ¿£¨¿â´æÁ¿£©£º  ");
+			printf("è¯·è¾“å…¥å•†å“è¿›è´§é‡ï¼ˆåº“å­˜é‡ï¼‰ï¼š  ");
 			scanf("%d", &new->stay_number);
 			new->sale_number = 0;
 			new->next = NULL;
 			index->next = new;
-			printf("\n±àºÅ\tÃû³Æ\t½ø¼Û\t\tÊÛ¼Û\t\tÏúÁ¿\t¿â´æ\n");
+			printf("\nç¼–å·\tåç§°\tè¿›ä»·\t\tå”®ä»·\t\té”€é‡\tåº“å­˜\n");
 			Disply(new);
-			printf("ĞÂÔöÉÌÆ·³É¹¦!\n");
+			printf("æ–°å¢å•†å“æˆåŠŸ!\n");
 			saveToFile(head, "goods.txt");
 			pay += new->cost*new->stay_number;
 		}
 
-		printf("Äã»¹Ïë¼ÌĞøĞÂÔöÉÌÆ·Âğ£¿\n");
-		printf("1--ÊÇ£¬ 0--·ñ\n");
+		printf("ä½ è¿˜æƒ³ç»§ç»­æ–°å¢å•†å“å—ï¼Ÿ\n");
+		printf("1--æ˜¯ï¼Œ 0--å¦\n");
 		scanf("%d", &choice);
 	}
-	printf("ÍË³öĞÂÔöÉÌÆ·\n");
-	return pay;//·µ»ØÖµÊÇ»¨·ÑÁË¶àÉÙÇ®
+	printf("é€€å‡ºæ–°å¢å•†å“\n");
+	return pay;//è¿”å›å€¼æ˜¯èŠ±è´¹äº†å¤šå°‘é’±
 }
 
-//ÉÌÆ·ĞŞ¸Ä
-int changegoods(double arr[])
+//å•†å“ä¿®æ”¹
+int change_goods(double arr[])
 {
-	printf("ÄãÏëĞŞ¸ÄÉÌÆ·Âğ£¿\n");
-	printf("1--ÊÇ£¬ 0--·ñ\n");
+	printf("ä½ æƒ³ä¿®æ”¹å•†å“å—ï¼Ÿ\n");
+	printf("1--æ˜¯ï¼Œ 0--å¦\n");
 	int choice;
 	scanf("%d", &choice);
 	while (choice == 1)
 	{
-		printf("ÇëÊäÈëÉÌÆ·µÄ±àºÅ");
+		printf("è¯·è¾“å…¥å•†å“çš„ç¼–å·");
 		int number;
 		scanf("%d", &number);
 		struct goods *currtentNode = NULL;
 		currtentNode = (struct goods *)malloc(sizeof(struct goods));
 
-		int exit = 0;//ÉÌÆ·ÊÇ·ñ´æÔÚ
+		int exit = 0;//å•†å“æ˜¯å¦å­˜åœ¨
 		struct goods *head = readFile();
 		struct goods *index = NULL;
 		index = (struct goods *)malloc(sizeof(struct goods));
 		if (index == NULL)
 		{
-			printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+			printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 			return 0;
 		}
 		index = head;
@@ -232,29 +230,29 @@ int changegoods(double arr[])
 
 		if (exit == 0)
 		{
-			printf("ÄãÏëĞŞ¸ÄÉÌÆ·µÄÉÌÆ·²»´æÔÚ\n");
+			printf("ä½ æƒ³ä¿®æ”¹å•†å“çš„å•†å“ä¸å­˜åœ¨\n");
 		}
 		else
 		{
 #if(0)
-			printf("ÇëÊäÈëĞŞ¸ÄºóÉÌÆ·±àºÅ£º  ");
+			printf("è¯·è¾“å…¥ä¿®æ”¹åå•†å“ç¼–å·ï¼š  ");
 			scanf("%d", &currtentNode->number);
-			printf("ÇëÊäÈëĞŞ¸ÄºóÉÌÆ·Ãû³Æ£º  ");
+			printf("è¯·è¾“å…¥ä¿®æ”¹åå•†å“åç§°ï¼š  ");
 			scanf("%s", currtentNode->name);
-			printf("ÇëÊäÈëĞŞ¸ÄºóÉÌÆ·½ø¼Û£º  ");
+			printf("è¯·è¾“å…¥ä¿®æ”¹åå•†å“è¿›ä»·ï¼š  ");
 			scanf("%lf", &currtentNode->cost);
-			printf("ÇëÊäÈëĞŞ¸ÄºóÉÌÆ·ÊÛ¼Û£º  ");
+			printf("è¯·è¾“å…¥ä¿®æ”¹åå•†å“å”®ä»·ï¼š  ");
 			scanf("%lf", &currtentNode->price);
-			printf("ÇëÊäÈëĞŞ¸ÄºóÉÌÆ·µÄÏúÊÛÁ¿£º  ");
+			printf("è¯·è¾“å…¥ä¿®æ”¹åå•†å“çš„é”€å”®é‡ï¼š  ");
 			scanf("%lf", &currtentNode->sale_number);
-			printf("ÇëÊäÈëĞŞ¸ÄºóÉÌÆ·µÄ¿â´æÁ¿£º  ");
+			printf("è¯·è¾“å…¥ä¿®æ”¹åå•†å“çš„åº“å­˜é‡ï¼š  ");
 			scanf("%d", &currtentNode->stay_munber);
 #endif
-			printf("\n±àºÅ\tÃû³Æ\t½ø¼Û\tÊÛ¼Û\tÏúÁ¿\t¿â´æ\n");
+			printf("\nç¼–å·\tåç§°\tè¿›ä»·\tå”®ä»·\té”€é‡\tåº“å­˜\n");
 			printf("%d\t%s\t%lf\t%lf\t%d\t%d\n", currtentNode->number, currtentNode->name, currtentNode->cost, currtentNode->price, currtentNode->sale_number, currtentNode->stay_number);
-			printf("ÇëÑ¡ÔñÄãÒªĞŞ¸ÄµÄÑ¡Ïî\n");
-			printf("1--±àºÅ\t2--Ãû³Æ\t3--ÊÛ¼Û\n");
-			printf("4--ÉÌÆ·ÊıÁ¿µÄ±ä»¯£¬+´ú±í½ø»õ£¬-´ú±íÊÛ³ö\n");
+			printf("è¯·é€‰æ‹©ä½ è¦ä¿®æ”¹çš„é€‰é¡¹\n");
+			printf("1--ç¼–å·\t2--åç§°\t3--å”®ä»·\n");
+			printf("4--å•†å“æ•°é‡çš„å˜åŒ–ï¼Œ+ä»£è¡¨è¿›è´§ï¼Œ-ä»£è¡¨å”®å‡º\n");
 			int choice2;
 			scanf("%d", &choice2);
 			switch (choice2)
@@ -263,7 +261,7 @@ int changegoods(double arr[])
 			{
 					  int number1;
 					  int i = 0;
-					  printf("ÇëÊäÈëĞŞ¸ÄºóÉÌÆ·±àºÅ£º  ");
+					  printf("è¯·è¾“å…¥ä¿®æ”¹åå•†å“ç¼–å·ï¼š  ");
 					  scanf("%d", &number1);
 					  do
 					  {
@@ -274,7 +272,7 @@ int changegoods(double arr[])
 							  if (index->number == number1)
 							  {
 								  i = 1;
-								  printf("%dºÍÏÖÓĞÉÌÆ·µÄ±àºÅÖØ¸´£¬ÇëÖØĞÂÊäÈë!", number1);
+								  printf("%då’Œç°æœ‰å•†å“çš„ç¼–å·é‡å¤ï¼Œè¯·é‡æ–°è¾“å…¥!", number1);
 								  scanf("%d", &number1);
 							  }
 							  index = index->next;
@@ -285,19 +283,19 @@ int changegoods(double arr[])
 			}
 			case 2:
 			{
-					  printf("ÇëÊäÈëĞŞ¸ÄºóÉÌÆ·Ãû³Æ£º  ");
+					  printf("è¯·è¾“å…¥ä¿®æ”¹åå•†å“åç§°ï¼š  ");
 					  scanf("%s", currtentNode->name);
 					  break;
 			}
 			case 3:
 			{
-					  printf("ÇëÊäÈëĞŞ¸ÄºóÉÌÆ·ÊÛ¼Û£º  ");
+					  printf("è¯·è¾“å…¥ä¿®æ”¹åå•†å“å”®ä»·ï¼š  ");
 					  scanf("%lf", &currtentNode->price);
 					  break;
 			}
 			case 4:
 			{
-					  printf("ÇëÊäÈëÉÌÆ·ÊıÁ¿µÄ±ä»¯£º+´ú±í½ø»õ£¬-´ú±íÊÛ³ö");
+					  printf("è¯·è¾“å…¥å•†å“æ•°é‡çš„å˜åŒ–ï¼š+ä»£è¡¨è¿›è´§ï¼Œ-ä»£è¡¨å”®å‡º");
 					  int change;
 					  scanf("%d", &change);
 					  if (change > 0)
@@ -314,35 +312,35 @@ int changegoods(double arr[])
 						  arr[0] += (currtentNode->price)*(-1)*change;
 					  }
 					  else{
-						  printf("ÎŞ±ä»¯£¡");
+						  printf("æ— å˜åŒ–ï¼");
 					  }
 					  break;
 			}
 			}
-			printf("ĞŞ¸ÄÉÌÆ·³É¹¦!\n");
-			printf("\n±àºÅ\tÃû³Æ\t½ø¼Û\tÊÛ¼Û\tÏúÁ¿\t¿â´æ\n");
+			printf("ä¿®æ”¹å•†å“æˆåŠŸ!\n");
+			printf("\nç¼–å·\tåç§°\tè¿›ä»·\tå”®ä»·\té”€é‡\tåº“å­˜\n");
 			printf("%d\t%s\t%lf\t%lf\t%d\t%d\n", currtentNode->number, currtentNode->name, currtentNode->cost, currtentNode->price, currtentNode->sale_number, currtentNode->stay_number);
 			saveToFile(head, "goods.txt");
 		}
 
-		printf("Äã»¹Ïë¼ÌĞøĞŞ¸ÄÉÌÆ·Âğ£¿\n");
-		printf("1--ÊÇ£¬ 0--·ñ\n");
+		printf("ä½ è¿˜æƒ³ç»§ç»­ä¿®æ”¹å•†å“å—ï¼Ÿ\n");
+		printf("1--æ˜¯ï¼Œ 0--å¦\n");
 		scanf("%d", &choice);
 	}
-	printf("ÍË³öĞŞ¸ÄÉÌÆ·\n");
+	printf("é€€å‡ºä¿®æ”¹å•†å“\n");
 }
 
-//ÉÌÆ·É¾³ı
-double delgoods()
+//å•†å“åˆ é™¤
+double del_goods()
 {
 	double income = 0.0;
-	printf("ÄãÏëÉ¾³ıÉÌÆ·Âğ£¿\n");
-	printf("1--ÊÇ£¬ 0--·ñ\n");
+	printf("ä½ æƒ³åˆ é™¤å•†å“å—ï¼Ÿ\n");
+	printf("1--æ˜¯ï¼Œ 0--å¦\n");
 	int choice;
 	scanf("%d", &choice);
 	while (choice == 1)
 	{
-		printf("ÇëÊäÈëÏëÉ¾³ıµÄÉÌÆ·µÄ±àºÅ\n");
+		printf("è¯·è¾“å…¥æƒ³åˆ é™¤çš„å•†å“çš„ç¼–å·\n");
 		int number;
 		scanf("%d", &number);
 		struct goods *currtentNode = NULL;
@@ -350,13 +348,13 @@ double delgoods()
 		struct goods *lastNode = NULL;
 		lastNode = (struct goods *)malloc(sizeof(struct goods));
 
-		int exit = 0;//ÉÌÆ·ÊÇ·ñ´æÔÚ
+		int exit = 0;//å•†å“æ˜¯å¦å­˜åœ¨
 		struct goods *head = readFile();
 		struct goods *index = NULL;
 		index = (struct goods *)malloc(sizeof(struct goods));
 		if (index == NULL)
 		{
-			printf("Ã»ÓĞ×ã¹»µÄÄÚ´æ£¡");
+			printf("æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜ï¼");
 			return 0;
 		}
 		index = head;
@@ -376,45 +374,45 @@ double delgoods()
 
 		if (exit == 0)
 		{
-			printf("ÄãÏëÉ¾³ıÉÌÆ·µÄÉÌÆ·²»´æÔÚ\n");
+			printf("ä½ æƒ³åˆ é™¤å•†å“çš„å•†å“ä¸å­˜åœ¨\n");
 		}
 		else
 		{
-			printf("ÄãÈ·¶¨É¾³ıÏÂÊöÉÌÆ·£¿\n1--È·¶¨ 0--ÍË³ö\n\n");
-			printf("\n±àºÅ\tÃû³Æ\t½ø¼Û\t\tÊÛ¼Û\t\tÏúÁ¿\t¿â´æ\n");
+			printf("ä½ ç¡®å®šåˆ é™¤ä¸‹è¿°å•†å“ï¼Ÿ\n1--ç¡®å®š 0--é€€å‡º\n\n");
+			printf("\nç¼–å·\tåç§°\tè¿›ä»·\t\tå”®ä»·\t\té”€é‡\tåº“å­˜\n");
 			printf("%d\t%s\t%lf\t%lf\t%d\t%d\n", currtentNode->number, currtentNode->name, currtentNode->cost, currtentNode->price, currtentNode->sale_number, currtentNode->stay_number);
 			int a;
 			scanf("%d", &a);
 			if (a == 1)
 			{
 				lastNode->next = currtentNode->next;
-				printf("É¾³ıÉÌÆ·³É¹¦!\n");
+				printf("åˆ é™¤å•†å“æˆåŠŸ!\n");
 				saveToFile(head, "goods.txt");
 				income += currtentNode->stay_number*currtentNode->price;
 			}
 			else
 			{
-				printf("É¾³ıÉÌÆ·Ê§°Ü!\n");
+				printf("åˆ é™¤å•†å“å¤±è´¥!\n");
 			}
 		}
-		printf("Äã»¹Ïë¼ÌĞøÉ¾³ıÉÌÆ·Âğ£¿\n");
-		printf("1--ÊÇ£¬ 0--·ñ\n");
+		printf("ä½ è¿˜æƒ³ç»§ç»­åˆ é™¤å•†å“å—ï¼Ÿ\n");
+		printf("1--æ˜¯ï¼Œ 0--å¦\n");
 		scanf("%d", &choice);
 	}
-	printf("ÍË³öÉ¾³ıÉÌÆ·\n");
+	printf("é€€å‡ºåˆ é™¤å•†å“\n");
 	return income;
 }
 
-//ÉÌÆ·Í³¼Æ
-int sortgoods()
+//å•†å“ç»Ÿè®¡
+int sort_goods()
 {
 	struct goods *head = NULL;
 	head = (struct goods*)malloc(sizeof(struct goods));
 	head = readFile();
-	int a = 0; //ÏúÊÛÊıÁ¿×ÜºÍ  
-	double b = 0; //ÏúÊÛ½ğ¶î×ÜºÍ  
-	int c = 0;  //ÉÌÆ·ÖÖÀà×ÜºÍ
-	double d = 0;  //½ø»õ½ğ¶î×ÜºÍ 
+	int a = 0; //é”€å”®æ•°é‡æ€»å’Œ  
+	double b = 0; //é”€å”®é‡‘é¢æ€»å’Œ  
+	int c = 0;  //å•†å“ç§ç±»æ€»å’Œ
+	double d = 0;  //è¿›è´§é‡‘é¢æ€»å’Œ 
 	struct goods *p = NULL;
 	for (p = head; p; p = p->next)
 	{
@@ -423,11 +421,11 @@ int sortgoods()
 		c++;
 		d += p->cost*p->stay_number;
 	}
-	printf("Í³¼ÆÊı¾İºó¿ÉÖª£º\n");       //Í³¼ÆÒÔºó½«½á¹û·´À¡¸øÓÃ»§ 
-	printf("1¡¢¹²ÓĞ%dÖÖÉÌÆ·\n", c);
-	printf("2¡¢ÉÌÆ·µÄ½ø»õ½ğ¶î×ÜºÍÎª£º%g\n", d);
-	printf("3¡¢ÉÌÆ·µÄÏúÊÛÊıÁ¿×ÜºÍÎª£º%d\n", a);
-	printf("4¡¢ÉÌÆ·µÄÏúÊÛ½ğ¶î×ÜºÍÎª£º%g\n", b);
+	printf("ç»Ÿè®¡æ•°æ®åå¯çŸ¥ï¼š\n");       //ç»Ÿè®¡ä»¥åå°†ç»“æœåé¦ˆç»™ç”¨æˆ· 
+	printf("1ã€å…±æœ‰%dç§å•†å“\n", c);
+	printf("2ã€å•†å“çš„è¿›è´§é‡‘é¢æ€»å’Œä¸ºï¼š%g\n", d);
+	printf("3ã€å•†å“çš„é”€å”®æ•°é‡æ€»å’Œä¸ºï¼š%d\n", a);
+	printf("4ã€å•†å“çš„é”€å”®é‡‘é¢æ€»å’Œä¸ºï¼š%g\n", b);
 	return 0;
 }
 
