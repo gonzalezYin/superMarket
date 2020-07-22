@@ -1,9 +1,10 @@
 #include<stdio.h>
-#include"finance_system.h"//²ÆÎñ¹ÜÀíÏµÍ³
-#include"goods_system.h"//ÉÌÆ·¹ÜÀíÏµÍ³
-#include"login_system.h"//Ö÷²Ëµ¥
-#include"staff_system.h"//¹ÜÀíÔ±¹ÜÀíÏµÍ³
-#include "structural_morphology.h"
+#include"finance_system.h"//è´¢åŠ¡ç®¡ç†ç³»ç»Ÿ
+#include"goods_system.h"//å•†å“ç®¡ç†ç³»ç»Ÿ
+#include"login_system.h"//ç™»å½•ç³»ç»Ÿ
+#include"staff_system.h"//ç®¡ç†å‘˜ç®¡ç†ç³»ç»Ÿ
+#include"menu.h"//èœå•ç®¡ç†
+#include "definition.h"
 
 void goods_inquiry();
 void staff_inquiry();
@@ -17,7 +18,7 @@ void staff_menu();
 int main()
 {
 	//system("color 7D");
-	int choice;           //¼ÇÂ¼ÓÃ»§µÄ¹¦ÄÜÑ¡Ïî 
+	int choice;           //è®°å½•ç”¨æˆ·çš„åŠŸèƒ½é€‰é¡¹ 
 	char c;
 	int identity = 0;
 	double finance[2] = { 0.0, 0.0 }; //income and pay
@@ -25,7 +26,7 @@ int main()
 	{
 		
 		choice = main_menu();
-		system("cls");  //¼°Ê±ÇåÆÁÒÔÃÀ»¯½çÃæ 
+		system("cls");  //åŠæ—¶æ¸…å±ä»¥ç¾åŒ–ç•Œé¢ 
 		if (choice == 1)
 		{
 			
@@ -36,7 +37,7 @@ int main()
 				}
 				else
 				{
-					printf("³¬¼¶¹ÜÀíÔ±ÏµÍ³µÇÂ½Ê§°ÜÁË£¡\n\n\n");
+					printf("è¶…çº§ç®¡ç†å‘˜ç³»ç»Ÿç™»é™†å¤±è´¥äº†ï¼\n\n\n");
 				}
 			
 		}
@@ -50,49 +51,49 @@ int main()
 				}
 				else
 				{
-					printf("¹ÜÀíÔ±ÏµÍ³µÇÂ½Ê§°ÜÁË£¡\n\n\n");
+					printf("ç®¡ç†å‘˜ç³»ç»Ÿç™»é™†å¤±è´¥äº†ï¼\n\n\n");
 				}
 			
 		}
 		else if (choice == 0)
 		{
 			system("cls");
-			printf("³¬ÊĞ¹ÜÀíÏµÍ³»¶Ó­ÔÙ´ÎÎªÄú·şÎñ£¬ÔÙ¼û~\n");
+			printf("è¶…å¸‚ç®¡ç†ç³»ç»Ÿæ¬¢è¿å†æ¬¡ä¸ºæ‚¨æœåŠ¡ï¼Œå†è§~\n");
 			exit(0);
 		}
 		else 
 		{
-			printf("ÊäÈëÓĞÎó£¬ÇëÖØÊÔ\n");
+			printf("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡è¯•\n");
 		}
 		system("pause");
 	}
 	return 0;
 }
-//Ê¹ÓÃ
+//ä½¿ç”¨
 void super_staff_menu(double finance[]){
 	int choice = 0;
 	while (choice != 4) {
 		printf("\n\n\n\n\n\t\t*********************************************************\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
-		printf("\t\t*             »¶Ó­À´µ½³¬¼¶¹ÜÀíÔ±ĞÅÏ¢²éÑ¯ÏµÍ³            *\t\t\n");
+		printf("\t\t*             æ¬¢è¿æ¥åˆ°è¶…çº§ç®¡ç†å‘˜ä¿¡æ¯æŸ¥è¯¢ç³»ç»Ÿ            *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*********************************************************\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
-		printf("\t\t*                  1. ²éÑ¯¹ÜÀíĞÅÏ¢                      *\t\t\n");
+		printf("\t\t*                  1. æŸ¥è¯¢ç®¡ç†ä¿¡æ¯                      *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
-		printf("\t\t*                  2. ²éÑ¯²ÆÎñĞÅÏ¢                      *\t\t\n");
+		printf("\t\t*                  2. æŸ¥è¯¢è´¢åŠ¡ä¿¡æ¯                      *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
-		printf("\t\t*                  3. ĞŞ¸ÄÃÜÂë¹¦ÄÜ                      *\t\t\n");
+		printf("\t\t*                  3. ä¿®æ”¹å¯†ç åŠŸèƒ½                      *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
-		printf("\t\t*                  4. ÍË³öµ±Ç°½çÃæ                      *\t\t\n");
+		printf("\t\t*                  4. é€€å‡ºå½“å‰ç•Œé¢                      *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*********************************************************\t\t\n\n");
-		printf("ÇëÊäÈëÄãµÄÑ¡Ôñ£º\n");
+		printf("è¯·è¾“å…¥ä½ çš„é€‰æ‹©ï¼š\n");
 		scanf("%d", &choice);
 		switch (choice) {
 		case 1:
@@ -105,11 +106,11 @@ void super_staff_menu(double finance[]){
 			change_password();
 			break;
 		case 4:
-			printf("ÄúÑ¡ÔñÁËÍË³öÏµÍ³£¬×£ÄúÉú»îÓä¿ì¡£\n");
+			printf("æ‚¨é€‰æ‹©äº†é€€å‡ºç³»ç»Ÿï¼Œç¥æ‚¨ç”Ÿæ´»æ„‰å¿«ã€‚\n");
 			exit(0);
 			break;
 		default:
-			printf("ÊäÈëÎŞĞ§£¬ÇëÈ·ÈÏºóÖØĞÂÊäÈë¡£\n");
+			printf("è¾“å…¥æ— æ•ˆï¼Œè¯·ç¡®è®¤åé‡æ–°è¾“å…¥ã€‚\n");
 		}
 	}
 }
@@ -118,22 +119,22 @@ void staff_menu(double finance[]){
 	while (choice != 3) {
 		printf("\n\n\n\n\n\t\t*********************************************************\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
-		printf("\t\t*             »¶Ó­À´µ½ÆÕÍ¨¹ÜÀíÔ±ĞÅÏ¢²éÑ¯ÏµÍ³            *\t\t\n");
+		printf("\t\t*             æ¬¢è¿æ¥åˆ°æ™®é€šç®¡ç†å‘˜ä¿¡æ¯æŸ¥è¯¢ç³»ç»Ÿ            *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*********************************************************\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
-		printf("\t\t*                  1. ²éÑ¯ÉÌÆ·ĞÅÏ¢                      *\t\t\n");
+		printf("\t\t*                  1. æŸ¥è¯¢å•†å“ä¿¡æ¯                      *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
-		printf("\t\t*                  2. ĞŞ¸ÄÃÜÂë¹¦ÄÜ                      *\t\t\n");
+		printf("\t\t*                  2. ä¿®æ”¹å¯†ç åŠŸèƒ½                      *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
-		printf("\t\t*                  3. ÍË³öµ±Ç°½çÃæ                      *\t\t\n");
+		printf("\t\t*                  3. é€€å‡ºå½“å‰ç•Œé¢                      *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*                                                       *\t\t\n");
 		printf("\t\t*********************************************************\t\t\n\n");
-		printf("ÇëÊäÈëÄãµÄÑ¡Ôñ£º\n");
+		printf("è¯·è¾“å…¥ä½ çš„é€‰æ‹©ï¼š\n");
 		scanf("%d", &choice);
 		switch (choice) {
 		case 1:
@@ -143,145 +144,145 @@ void staff_menu(double finance[]){
 			change_password();
 			break;
 		case 3:
-			printf("ÄúÑ¡ÔñÁËÍË³öÏµÍ³£¬×£ÄúÉú»îÓä¿ì¡£\n");
+			printf("æ‚¨é€‰æ‹©äº†é€€å‡ºç³»ç»Ÿï¼Œç¥æ‚¨ç”Ÿæ´»æ„‰å¿«ã€‚\n");
 			break;
 		default:
-			printf("ÊäÈëÎŞĞ§£¬ÇëÈ·ÈÏºóÖØĞÂÊäÈë¡£\n");
+			printf("è¾“å…¥æ— æ•ˆï¼Œè¯·ç¡®è®¤åé‡æ–°è¾“å…¥ã€‚\n");
 		}
 	}
 }
-//Ê¹ÓÃ»õÎï¹ÜÀíÏµÍ³
+//ä½¿ç”¨è´§ç‰©ç®¡ç†ç³»ç»Ÿ
 void goods_inquiry(double finance[]){
 	int i;
 	system("pause");
 	system("cls");
-	i = goodsmemu();
+	i = goods_memu();
 	while (i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6)
 	{
-		if (i == 1)  //Ìí¼ÓÉÌÆ·
+		if (i == 1)  //æ·»åŠ å•†å“
 		{
 			system("cls");
-			finance[1] +=addgoods(); //µ÷ÓÃÌí¼ÓÉÌÆ·µÄº¯Êı 
+			finance[1] +=add_goods(); //è°ƒç”¨æ·»åŠ å•†å“çš„å‡½æ•° 
 			system("pause");
 			system("cls");
 		}
-		if (i == 2) //É¾³ıÉÌÆ·
+		if (i == 2) //åˆ é™¤å•†å“
 		{
 			system("cls");
-			finance[0] += delgoods(); //µ÷ÓÃÉ¾³ıÉÌÆ·µÄº¯Êı 
+			finance[0] += del_goods(); //è°ƒç”¨åˆ é™¤å•†å“çš„å‡½æ•° 
 			system("pause");
 			system("cls");
 		}
-		if (i == 3)  //ĞŞ¸ÄÉÌÆ·
+		if (i == 3)  //ä¿®æ”¹å•†å“
 		{
 			system("cls");
-			changegoods(finance); //µ÷ÓÃĞŞ¸ÄÉÌÆ·µÄº¯Êı
+			change_goods(finance); //è°ƒç”¨ä¿®æ”¹å•†å“çš„å‡½æ•°
 			system("pause");
 			system("cls");
 		}
-		if (i == 4)  //Í³¼ÆÉÌÆ· 
+		if (i == 4)  //ç»Ÿè®¡å•†å“ 
 		{
 			system("cls");
-			sortgoods(); //µ÷ÓÃÍ³¼ÆÉÌÆ·µÄº¯Êı 
+			sort_goods(); //è°ƒç”¨ç»Ÿè®¡å•†å“çš„å‡½æ•° 
 			system("pause");
 			system("cls");
 		}
-		if (i == 5)  //Õ¹Ê¾ÉÌÆ·
+		if (i == 5)  //å±•ç¤ºå•†å“
 		{
 			system("cls");
-			printf("\n±àºÅ\tÃû³Æ\t½ø¼Û\t\tÊÛ¼Û\t\tÏúÁ¿\t¿â´æ\n");
-			Disply(readFile()); //µ÷ÓÃÕ¹Ê¾ÉÌÆ·µÄº¯Êı
+			printf("\nç¼–å·\tåç§°\tè¿›ä»·\t\tå”®ä»·\t\té”€é‡\tåº“å­˜\n");
+			display(read_file()); //è°ƒç”¨å±•ç¤ºå•†å“çš„å‡½æ•°
 			system("pause");
 			system("cls");
 		}
-		if (i == 6)  //²éÕÒÉÌÆ·
+		if (i == 6)  //æŸ¥æ‰¾å•†å“
 		{
 			system("cls");
-			findgoods(); //µ÷ÓÃ²éÕÒÉÌÆ·µÄº¯Êı
+			find_goods(); //è°ƒç”¨æŸ¥æ‰¾å•†å“çš„å‡½æ•°
 			system("pause");
 			system("cls");
 		}
-		i = goodsmemu();
+		i = goods_memu();
 	}
 	system("cls");
 	system("pause");
-	printf("ÉÌÆ·¹ÜÀíÏµÍ³»¶Ó­ÔÙ´ÎÎªÄú·şÎñ£¬ÔÙ¼û~\n");
+	printf("å•†å“ç®¡ç†ç³»ç»Ÿæ¬¢è¿å†æ¬¡ä¸ºæ‚¨æœåŠ¡ï¼Œå†è§~\n");
 }
-//Ê¹ÓÃ¹ÜÀíÔ±¹ÜÀíÏµÍ³
+//ä½¿ç”¨ç®¡ç†å‘˜ç®¡ç†ç³»ç»Ÿ
 void staff_inquiry(){
 	int i;
 	system("pause");
 	system("cls");
-	i = staffmemu();
+	i = staff_memu();
 	while (i == 1 || i == 2 || i == 3 || i == 4)
 	{
-		if (i == 1)  //Ìí¼Ó¹ÜÀíÔ±
+		if (i == 1)  //æ·»åŠ ç®¡ç†å‘˜
 		{
 			system("cls");
 			add_staff();
 			system("pause");
 			system("cls");
 		}
-		if (i == 2) //É¾³ı¹ÜÀíÔ± 
+		if (i == 2) //åˆ é™¤ç®¡ç†å‘˜ 
 		{
 			system("cls");
 			delete_staff();
 			system("pause");
 			system("cls");
 		}
-		if (i == 3)  //ĞŞ¸Ä¹ÜÀíÔ± 
+		if (i == 3)  //ä¿®æ”¹ç®¡ç†å‘˜ 
 		{
 			system("cls");
 			change_staff();
 			system("pause");
 			system("cls");
 		}
-		if (i == 4)  //Õ¹Ê¾¹ÜÀíÔ±µÄĞÅÏ¢ 
+		if (i == 4)  //å±•ç¤ºç®¡ç†å‘˜çš„ä¿¡æ¯ 
 		{
 			system("cls");
-			Disply_staff(readFile_staff());
+			display_staff(read_file_staff());
 			system("pause");
 			system("cls");
 		}
-		i = staffmemu();
+		i = staff_memu();
 	}
 	system("cls");
 	system("pause");
-	printf("¹ÜÀíÔ±¹ÜÀíÏµÍ³»¶Ó­ÔÙ´ÎÎªÄú·şÎñ£¬ÔÙ¼û~\n");
+	printf("ç®¡ç†å‘˜ç®¡ç†ç³»ç»Ÿæ¬¢è¿å†æ¬¡ä¸ºæ‚¨æœåŠ¡ï¼Œå†è§~\n");
 }
 
-//Ê¹ÓÃ²ÆÎñ¹ÜÀíÏµÍ³
+//ä½¿ç”¨è´¢åŠ¡ç®¡ç†ç³»ç»Ÿ
 void finance_inquiry(double finance[]){
 	int i;
 	system("pause");
 	system("cls");
-	i = financememu();
+	i = finance_memu();
 	while (i == 1 || i == 2 || i == 3)
 	{
-		if (i == 1)  //½ñÈÕÊÕÈë
+		if (i == 1)  //ä»Šæ—¥æ”¶å…¥
 		{
 			system("cls");
-			printf("½ñÈÕÊÕÈë:%5lfÔª", income(finance));
+			printf("ä»Šæ—¥æ”¶å…¥:%5lfå…ƒ", income(finance));
 			system("pause");
 			system("cls");
 		}
-		if (i == 2) //½ñÈÕÖ§³ö 
+		if (i == 2) //ä»Šæ—¥æ”¯å‡º 
 		{
 			system("cls");
-			printf("½ñÈÕÖ§³ö:%5lfÔª", pay(finance));
+			printf("ä»Šæ—¥æ”¯å‡º:%5lfå…ƒ", pay(finance));
 			system("pause");
 			system("cls");
 		}
-		if (i == 3)  //½ñÈÕÓ¯Àû
+		if (i == 3)  //ä»Šæ—¥ç›ˆåˆ©
 		{
 			system("cls");
-			printf("½ñÈÕÓ¯Àû:%5lfÔª", gain(finance));
+			printf("ä»Šæ—¥ç›ˆåˆ©:%5lfå…ƒ", gain(finance));
 			system("pause");
 			system("cls");
 		}
-		i = financememu();
+		i = finance_memu();
 	}
 	system("pause");
 	system("cls");
-	printf("²ÆÎñ¹ÜÀíÏµÍ³»¶Ó­ÔÙ´ÎÎªÄú·şÎñ£¬ÔÙ¼û~\n");
+	printf("è´¢åŠ¡ç®¡ç†ç³»ç»Ÿæ¬¢è¿å†æ¬¡ä¸ºæ‚¨æœåŠ¡ï¼Œå†è§~\n");
 }
