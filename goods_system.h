@@ -5,29 +5,24 @@
 #ifndef SUPERMARKET_GOODS_SYSTEM_H
 #define SUPERMARKET_GOODS_SYSTEM_H
 #include<stdio.h>
-void saveToFile(struct goods *head, char name[]);
+#include"definition.h"
+void save_to_file(struct goods *head, char name[]);
 
-struct good *readFile();
+struct good *read_file();
 
-int Disply(struct node *head);
+int display(struct node *head);
 
-//选项展示
-int goodsmemu();
+int goods_memu();
 
-//商品录入
-double addgoods();
+double add_goods();
 
-//商品修改
-int changegoods();
+int change_goods();
 
-//查找商品
-int findgoods();
+int find_goods();
 
-//商品删除
-double delgoods();
+double del_goods();
 
-//商品统计
-int sortgoods();
+int sort_goods();
 
 
 
